@@ -1,41 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bienvenido a Programacion IV</title>
-    <link rel="stylesheet" href="estilos.css">
+<title>Bienvenido a Programacion IV</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head> 
-
 <body>
-    <h1>APP ALUMNOS OFFLINE</h1>
-    <form name="frmAlumnos" id="frmAlumnos" method="get">
-        <div class="container">
-            <div class="fila">
-                <input type="text" id="txtCodigoAlumno" 
-                    required="required" placeholder="codigo" pattern="^[A-Z]{4}[0-9]{6}">
-            </div>
-            <div class="fila">
-                <input type="text" id="txtNombreAlumno" required="required" 
-                    placeholder="Nombre" pattern="[a-zA-ZñÑ ]{3,65}">
-            </div>
-            <div class="fila">
-                <input type="text" id="txtDireccionAlumno" required="required" placeholder="Direccion" >
-            </div>
-            <div class="fila">
-                <input type="text" id="txtTelefonoAlumno" required="required" 
-                    placeholder="Telefono" pattern="[0-9]{4}-[0-9]{4}"><br>
-            </div>
-            <div class="fila">
-                <input type="button" value="Guardar" onclick="salvarForm()"><br>
-                <input type="button" value="Buscar" onclick="buscarForm()"><br>
-                <input type="button" value="Eliminar" onclick="deleteForm()">
-                <!--<input type="submit" value="Guardar">
-                <input type="button" id="btnRecuperarAlumno" value="Recuperar">-->
-            </div>
-        </div>
-    </form>
-    <script src="app.js"></script>
+<body class="bg-dark">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <a class="navbar-brand" href="#">::.. APP ACADEMICA ..::</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+            <div id="vistas-notas"></div>
+          </div>
+    </div>
+
+    <script src="public/js/app.js"></script>
 </body>
-</html>
+</html> 
+ 4 
