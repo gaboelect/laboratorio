@@ -1,0 +1,57 @@
+<form data-accion="nuevo" data-idalumno='' id="frm-alumnos" method="post">
+    <div class="card text-white bg-dark mb-3" style="max-width: 24rem;">
+        <div class="card-header">
+            Mantenimiento Alumnos
+        
+            <button type="button" id="btn-close-alumnos" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row p-2">
+                <div class="col-4">
+                    CODIGO
+                </div>
+                <div class="col-6">
+                    <input type="text" id="txtCodigoAlumno" placeholder="AAAA000000" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    NOMBRE
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtNombreAlumno" placeholder="AAA AAA" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    DIRECCION
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtDireccionAlumno" placeholder="AAA" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    TEL
+                </div>
+                <div class="col-8">
+                    <input type="text" id="txtTelefonoAlumno" placeholder="0000-0000" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2"> 
+                <div class="col-12 text-center">
+                    <input id="btnGuardarAlumnos" type="submit" class="btn btn-outline-primary text-white" value="Guardar">
+                    <input type="reset" class="btn btn-outline-warning text-white" value="Limpiar">
+                    <input type="button" class="btn btn-outline-success mostrar-buscar-alumnos text-white" data-modulo="alumnos" data-form="buscar-alumnos" value="Buscar">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-12 text-center">
+                    <div id="respuestaAlumno"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
