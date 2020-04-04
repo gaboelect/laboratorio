@@ -12,7 +12,7 @@ print_r(json_encode($docente->respuesta));
 class docente{
     private $datos = array(), $db;
     public $respuesta = ['msg'=>'correcto'];
-    
+
     public function __construct($db){
         $this->db=$db;
     }
@@ -28,10 +28,13 @@ class docente{
             $this->respuesta['msg'] = 'por favor ingrese el nombre del docente';
         }
         if( empty($this->datos['nit']) ){
-            $this->respuesta['msg'] = 'por favor ingrese el nit del docente';
+            $this->respuesta['msg'] = 'por favor ingrese el NIT del docente';
         }
         if( empty($this->datos['direccion']) ){
             $this->respuesta['msg'] = 'por favor ingrese la direccion del docente';
+        }
+        if( empty($this->datos['telefono']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el telefono del docente';
         }
         $this->almacenar_docente();
     }
@@ -45,7 +48,6 @@ class docente{
                         "'. $this->datos['nit'] .'",
                         "'. $this->datos['direccion'] .'",
                         "'. $this->datos['telefono'] .'"
-                       
                     )
                 ');
                 $this->respuesta['msg'] = 'Registro insertado correctamente';
@@ -57,7 +59,6 @@ class docente{
                         nit        = "'. $this->datos['nit'] .'",
                         direccion  = "'. $this->datos['direccion'] .'",
                         telefono   = "'. $this->datos['telefono'] .'"
-                        
                     WHERE idDocente = "'. $this->datos['idDocente'] .'"
                 ');
                 $this->respuesta['msg'] = 'Registro actualizado correctamente';
@@ -68,7 +69,7 @@ class docente{
         $this->db->consultas('
             select docentes.idDocente, docentes.codigo, docentes.nombre, docentes.nit, docentes.direccion, docentes.telefono
             from docentes
-            where docentes.codigo like "%'.$valor.'%" or docentes.nombre like "%'.$valor.'%" or docentes.nit like "%'.$valor.'%"
+            where docentes.codigo like "%'.$valor.'%" or docentes.nombre like "%'.$valor.'%"  or docentes.nit like "%'.$valor.'%"
         ');
         return $this->respuesta = $this->db->obtener_datos();
     }
