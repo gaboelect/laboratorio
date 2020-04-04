@@ -1,8 +1,7 @@
 <form method="POST" id="frm-buscar-docentes">
     <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
-            BUSQUEDA DOCENTES
-
+            Busqueda Docentes
             <button type="button" id="btn-close-buscar-docentes" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -12,7 +11,7 @@
                 <thead>
                     <tr>
                         <th colspan="5">
-                            <input type="text" id="txtBuscarDocente" placeholder="codigo, nombre o NIT" class="form-control">
+                            <input type="text" v-model="valor" v-on:keyup="buscarDocente" placeholder="codigo, nombre o NIT" class="form-control">
                         </th>
                     </tr>
                     <tr>
@@ -25,8 +24,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-for="maestro in misdocentes" :key="maestro.idDocente" v-on:click="modificarDocente(maestro)">
+                        <td>{{ maestro.codigo }}</td>
+                        <td>{{ maestro.nombre }}</td>
+                        <td>{{ maestro.nit }}</td>
+                        <td>{{ maestro.direccion }}</td>
+                        <td>{{ maestro.telefono }}</td>
+                        <td>
+                            <input v-on:click="eliminarDocente(maestro.idDocente)" type="button" class="btn btn-outline-danger text-white" value="del">
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </form>
+<script src="public/vistas/docentes/buscar-docentes.js"></script>
