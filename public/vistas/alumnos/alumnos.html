@@ -1,4 +1,4 @@
-<form data-accion="nuevo" data-idalumno='' id="frm-alumnos" method="post">
+<form v-on:submit.prevent="guardarAlumno" data-accion="nuevo" data-idalumno='' id="frm-alumnos" method="post">
     <div class="card text-white bg-dark mb-3" style="max-width: 24rem;">
         <div class="card-header">
             Mantenimiento Alumnos
@@ -13,7 +13,7 @@
                     CODIGO
                 </div>
                 <div class="col-6">
-                    <input type="text" id="txtCodigoAlumno" placeholder="AAAA000000" class="form-control">
+                    <input type="text" v-model="alumno.codigo" placeholder="AAAA000000" class="form-control">
                 </div>
             </div>
             <div class="row p-2">
@@ -21,7 +21,7 @@
                     NOMBRE
                 </div>
                 <div class="col-8">
-                    <input type="text" id="txtNombreAlumno" placeholder="AAA AAA" class="form-control">
+                    <input type="text" v-model="alumno.nombre" placeholder="AAA AAA" class="form-control">
                 </div>
             </div>
             <div class="row p-2">
@@ -29,7 +29,7 @@
                     DIRECCION
                 </div>
                 <div class="col-8">
-                    <input type="text" id="txtDireccionAlumno" placeholder="AAA" class="form-control">
+                    <input type="text" v-model="alumno.direccion" placeholder="AAA" class="form-control">
                 </div>
             </div>
             <div class="row p-2">
@@ -37,7 +37,7 @@
                     TEL
                 </div>
                 <div class="col-8">
-                    <input type="text" id="txtTelefonoAlumno" placeholder="0000-0000" class="form-control">
+                    <input type="text" v-model="alumno.telefono" placeholder="0000-0000" class="form-control">
                 </div>
             </div>
             <div class="row p-2"> 
@@ -49,9 +49,12 @@
             </div>
             <div class="row p-2">
                 <div class="col-12 text-center">
-                    <div id="respuestaAlumno"> </div>
+                    <div class="alert alert-success" role="alert"> 
+                        {{ alumno.msg }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script src="public/vistas/alumnos/alumnos.js"></script>
