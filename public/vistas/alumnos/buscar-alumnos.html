@@ -1,8 +1,7 @@
 <form method="POST" id="frm-buscar-alumnos">
     <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
-            BUSQUEDA ALUMNOS
-
+            Busqueda Alumnos
             <button type="button" id="btn-close-buscar-alumnos" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -12,7 +11,7 @@
                 <thead>
                     <tr>
                         <th colspan="5">
-                            <input type="text" id="txtBuscarAlumno" placeholder="codigo o nombre" class="form-control">
+                            <input type="text" v-model="valor" v-on:keyup="buscarAlumno" placeholder="codigo o nombre" class="form-control">
                         </th>
                     </tr>
                     <tr>
@@ -24,9 +23,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <tr v-for="estudiante in misalumnos" :key="estudiante.idAlumno" v-on:click="modificarAlumno(estudiante)">
+                        <td>{{ estudiante.codigo }}</td>
+                        <td>{{ estudiante.nombre }}</td>
+                        <td>{{ estudiante.direccion }}</td>
+                        <td>{{ estudiante.telefono }}</td>
+                        <td>
+                            <input v-on:click="eliminarAlumno(estudiante.idAlumno)" type="button" class="btn btn-outline-danger text-white" value="del">
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </form>
+<script src="public/vistas/alumnos/buscar-alumnos.js"></script>
