@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-04-2020 a las 20:26:40
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Tiempo de generación: 26-04-2020 a las 23:00:14
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -51,12 +50,24 @@ INSERT INTO `Clientes` (`Id_Clientes`, `Nombre`, `Direccion`, `Telefono`) VALUES
 
 CREATE TABLE `Facturacion` (
   `Id_Facturacion` int(11) NOT NULL,
-  `Id_Clientes` int(11) NOT NULL,
-  `Id_Servicios` int(11) NOT NULL,
-  `Id_TipoPago` int(11) NOT NULL,
   `Id_personal` int(11) NOT NULL,
-  `Id_Vehiculo` int(11) NOT NULL
+  `Id_Clientes` int(11) NOT NULL,
+  `Fecha_Hora_E` datetime NOT NULL,
+  `Fecha_Hora_S` datetime DEFAULT NULL,
+  `ValorPagado` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `Facturacion`
+--
+
+INSERT INTO `Facturacion` (`Id_Facturacion`, `Id_personal`, `Id_Clientes`, `Fecha_Hora_E`, `Fecha_Hora_S`, `ValorPagado`) VALUES
+(1, 1, 3, '2020-04-24 12:21:11', NULL, '9.00'),
+(2, 1, 3, '2020-04-24 14:07:07', NULL, '3.50'),
+(6, 5, 1, '2020-04-25 22:24:39', NULL, '0.00'),
+(7, 4, 3, '2020-04-25 22:37:10', NULL, '0.00'),
+(8, 5, 1, '2020-04-26 12:49:17', '2020-04-26 14:55:45', '3.50'),
+(9, 1, 3, '2020-04-26 12:50:21', NULL, '0.00');
 
 -- --------------------------------------------------------
 
@@ -70,16 +81,20 @@ CREATE TABLE `Personal` (
   `Nombre` varchar(200) NOT NULL,
   `Direccion` varchar(100) NOT NULL,
   `Telefono` varchar(10) NOT NULL,
-  `Cargo` varchar(20) NOT NULL
+  `Cargo` varchar(20) NOT NULL,
+  `Usuario` varchar(20) NOT NULL,
+  `Password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Personal`
 --
 
-INSERT INTO `Personal` (`Id_Personal`, `Codigo`, `Nombre`, `Direccion`, `Telefono`, `Cargo`) VALUES
-(1, 'EMPLE098976', 'BENITO', 'SAN GORGE', '8978-0989', 'Mecanico'),
-(4, 'EMPLE095678', 'JUAN', 'SAN SALVADOR', '7780-9009', 'Lavador');
+INSERT INTO `Personal` (`Id_Personal`, `Codigo`, `Nombre`, `Direccion`, `Telefono`, `Cargo`, `Usuario`, `Password`) VALUES
+(1, 'EMPLE098976', 'BENITO', 'SAN GORGE', '8978-0989', 'Mecanico', 'ey', 'ay'),
+(4, 'EMPLE095678', 'JUAN', 'SAN SALVADOR', '7780-9009', 'Lavador', 'Juan', 'Juan'),
+(5, 'usis007518', 'Stanley', 'Santa Elena', '7740-1395', 'Administrador', 'admin', 'admin'),
+(6, '90', 'Pedro', 'San Gorge', '0000-0000', 'Lavador', 'ad', 'ad');
 
 -- --------------------------------------------------------
 
@@ -89,17 +104,19 @@ INSERT INTO `Personal` (`Id_Personal`, `Codigo`, `Nombre`, `Direccion`, `Telefon
 
 CREATE TABLE `Servicios` (
   `Id_servicios` int(11) NOT NULL,
-  `Id_Clientes` int(11) NOT NULL,
   `Id_TipoServicio` int(11) NOT NULL,
-  `Fecha` date NOT NULL
+  `Id_Factura` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Servicios`
 --
 
-INSERT INTO `Servicios` (`Id_servicios`, `Id_Clientes`, `Id_TipoServicio`, `Fecha`) VALUES
-(1, 1, 1, '2020-04-19');
+INSERT INTO `Servicios` (`Id_servicios`, `Id_TipoServicio`, `Id_Factura`) VALUES
+(18, 1, 1),
+(19, 3, 1),
+(28, 1, 2),
+(31, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -137,7 +154,8 @@ CREATE TABLE `TipoServicio` (
 --
 
 INSERT INTO `TipoServicio` (`Id_TipoServicio`, `Servicio`, `Costo`) VALUES
-(1, 'Lavados', '3.50');
+(1, 'Lavados', '3.50'),
+(3, 'Lavado de Motor', '5.50');
 
 -- --------------------------------------------------------
 
@@ -246,19 +264,19 @@ ALTER TABLE `Clientes`
 -- AUTO_INCREMENT de la tabla `Facturacion`
 --
 ALTER TABLE `Facturacion`
-  MODIFY `Id_Facturacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `Personal`
 --
 ALTER TABLE `Personal`
-  MODIFY `Id_Personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_Personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `Servicios`
 --
 ALTER TABLE `Servicios`
-  MODIFY `Id_servicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id_servicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `TipoPago`
@@ -270,7 +288,7 @@ ALTER TABLE `TipoPago`
 -- AUTO_INCREMENT de la tabla `TipoServicio`
 --
 ALTER TABLE `TipoServicio`
-  MODIFY `Id_TipoServicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_TipoServicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `TipoVehiculo`

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+    <!-- Alert -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS Local -->
+    <link rel="stylesheet" href="public/css/acceder-style.css">
+
+    <!-- ICONOS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Registrate</title>
+</head>
+<body>
+
+
+        <form v-on:submit.prevent="guardarRegistroLogin" id="frm-registrarse" method="get" data-accion="nuevo">
+            <p>CREAR CUENTA</p>
+            <div class="form-row">
+
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Usuario</label>
+                <input type="text" v-model="personal.Usuario" class="form-control" required placeholder="Usuario" id="inputUsuario">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Contraseña</label>
+                <input type="password" v-model="personal.Password" class="form-control" required placeholder="Contraseña" id="inputContraseña">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Nombre</label>
+              <input type="text" class="form-control" v-model="personal.Nombre" required id="inputNombre" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Codigo</label>
+                <input type="text" class="form-control" v-model="personal.Codigo" required id="inputCodigo" placeholder="Codigo">
+              </div>
+            <div class="form-group">
+              <label for="inputAddress2">Direccion</label>
+              <input type="text" class="form-control" v-model="personal.Direccion" required id="inputDireccion" placeholder="Direccion">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">Telefono</label>
+                <input type="text" class="form-control" v-model="personal.Telefono" required placeholder="0000-0000" id="inputTelefono">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputState">Cargo</label>
+                <select id="inputState" class="form-control" v-model="personal.Cargo" required>
+                  <option selected>Mecanico</option>
+                  <option>Lavador</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="button" class="btn btn-primary" v-on:click="tengoCuenta()">Tengo Cuenta</button>
+          </form>
+         
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue-select@latest"></script>
+<script src="public/js/acceder.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="public/js/jquery-ui.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
+
+
+</body>
+
+</html>

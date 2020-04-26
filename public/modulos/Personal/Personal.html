@@ -46,9 +46,28 @@
                 </div>
                 <div class="col-8">
                     <select v-model="personal.Cargo" style="width: 100%;">
+
                         <option value="Lavador">Lavador</option>
                         <option value="Mecanico">Mecanico</option>
+                        <option value="Administrador">Administrador</option>
+
                     </select>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    USUARIO
+                </div>
+                <div class="col-8">
+                    <input type="text" v-model="personal.Usuario" placeholder="User" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    PASSWORD
+                </div>
+                <div class="col-8">
+                    <input type="text" v-model="personal.Password" placeholder="*****" class="form-control">
                 </div>
             </div>
             <div class="row p-2"> 
@@ -116,6 +135,9 @@
                                     <input v-on:click="verificacionEliminacion(personal.Id_Personal)" type="button" class="btn btn-outline-danger text-white" value="Delete">
                                     <input v-on:click="modificarPersonal(personal)" data-dismiss="modal" type="button" class="btn btn-outline-warning text-white" value="Update">
                                 </td>
+                                <td style="display:none;">{{ personal.Usuario }}</td>
+                                <td style="display:none;">{{ personal.Password }}</td>
+                                
                             </tr>
                         </tbody>
                     </table>

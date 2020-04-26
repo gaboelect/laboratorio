@@ -1,21 +1,11 @@
 <form v-on:submit.prevent="guardarAgregarServicios" method="get" id="frmAgregarServicios" data-accion="nuevo">
 
-    <div class="card text-white bg-primary mb-3" style="max-width: 28rem;">
+    <div class="card text-white bg-primary mb-3" style="width: 100%;">
         <div class="card-header text-center">
-            Agregar Servicios
-            <button type="button" id="close-Agregarservicios" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            Servicios
         </div>
         <div class="card-body">
-            <div class="row p-2">
-                <div class="col-4">
-                    CLIENTES
-                </div>
-                <div class="col-8">
-                    <v-select v-model="AgregarServicios.Cliente" :options="Cliente"></v-select>
-                </div>
-            </div>
+            <label v-model="AgregarServicios.Factura"> </label>
             <div class="row p-2">
                 <div class="col-4">
                     TIPO DE SERVICIO
@@ -24,28 +14,9 @@
                     <v-select v-model="AgregarServicios.Tipo_Servicio" :options="Servicio"></v-select>
                 </div>
             </div>
-            <div class="row p-2">
-                <div class="col-4">
-                    FECHA
-                </div>
-                <div class="col-8">
-                    <input v-model="AgregarServicios.Fecha" type="date">
-                </div>
-            </div>
             <div class="row p-2"> 
                 <div class="col-12 text-center">
-                    <input id="btnGuardarAgregarServicios" type="submit" class="btn btn-outline-success text-white" value="Guardar">
-                    <input type="reset" class="btn btn-outline-warning text-white" value="Limpiar">
-                    <button v-on:click="buscarAgregarServicios()" type="button" class="btn btn-outline-dark mostrar-buscar-AgregarServicios text-white" data-toggle="modal" data-target="#exampleModalCenter">
-                        Buscar
-                      </button>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-12 text-center">
-                    <div class="alert alert-success" role="alert">
-                        {{ AgregarServicios.msg }}
-                    </div>
+                    <input id="btnGuardarAgregarServicios" type="submit" class="btn btn-outline-success text-white" value="Guardar" style="width: 100%;">
                 </div>
             </div>
         </div>
@@ -53,57 +24,39 @@
 
 </form>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Busqueda de AgregarServicios</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<form method="POST" id="frm-buscar-AgregarServicios">
+    <div class="card text-white bg-primary mb-3" style="max-width: 48rem;">
+        <div class="car-header">
+            BUSQUEDA DE AgregarServicios
         </div>
-        <div class="modal-body">
-          <form method="POST" id="frm-buscar-AgregarServicios">
-            <div class="card text-white bg-primary mb-3" style="max-width: 48rem;">
-                <div class="car-header">
-                    BUSQUEDA DE AgregarServicios
-                </div>
-                <div class="card-body">
-                    <table id="tbl-buscar-AgregarServicios" class="table-striped table-primarytable-hover">
-                        <thead>
-                            <tr>
-                                <th colspan="5">
-                                    <input type="text" v-model="valor" v-on:keyup="buscarAgregarServicios" placeholder="Nombre del cliente" class="form-control">
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Servicio</th>
-                                <th>Fecha</th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="Servicios in AgregarServicioses" :key="Servicios.Id_servicios">
-                                <td>{{ Servicios.Nombre }}</td>
-                                <td>{{ Servicios.Servicio }}</td>
-                                <td>{{ Servicios.Fecha }}</td>
-                                <td>
-                                    <input v-on:click="verificacionEliminacion(Servicios.Id_servicios)" type="button" class="btn btn-outline-danger text-white" value="Delete">
-                                    <input v-on:click="modificarAgregarServicios(Servicios)" data-dismiss="modal" type="button" class="btn btn-outline-warning text-white" value="Update">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
-        
+        <div class="card-body">
+            <table id="tbl-buscar-AgregarServicios" class="table-striped table-primarytable-hover">
+                <thead>
+                    <tr>
+                        <th colspan="5">
+                            <input type="text" v-model="valor" v-on:keyup="buscarAgregarServicios" placeholder="Nombre del cliente" class="form-control">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Costo</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="Servicios in AgregarServicioses" :key="Servicios.Id_servicios">
+                        
+                        <td>{{ Servicios.Servicio }}</td>
+                        <td>{{ Servicios.Costo }}</td>
+                        <td>
+                            <input v-on:click="verificacionEliminacion(Servicios.Id_servicios)" type="button" class="btn btn-outline-danger text-white" value="Delete">
+                            <input v-on:click="modificarAgregarServicios(Servicios)" type="button" class="btn btn-outline-warning text-white" value="Update">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="modal-footer">
-        </div>
-      </div>
     </div>
-  </div>
+</form>
 
 <script src="public/modulos/Agregarservicios/Agregarservicios.js"></script>

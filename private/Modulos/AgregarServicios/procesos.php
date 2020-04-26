@@ -10,7 +10,12 @@
         $proceso = $_GET['proceso'];
     }
 
-    $AgregarServicios->$proceso($_GET['AgregarServicio']);
+    if (isset( $_GET['Factura'] ) && strlen( $_GET['Factura'] ) > 0) {
+        $AgregarServicios->$proceso($_GET['AgregarServicio'], $_GET['Factura'] );
+    }
+    else {
+        $AgregarServicios->$proceso($_GET['AgregarServicio']);
+    }
  
     print_r(json_encode($AgregarServicios->respuesta));
 
@@ -35,21 +40,9 @@
 
         private function validar_datos(){
 
-
-            if ( empty( $this->datos['Cliente']) ) {
-                
-                $this->respuesta['msg'] = 'Por favor ingrese el nombre del Cliente';
-
-            }
-
             if ( empty( $this->datos['Tipo_Servicio']) ) {
                 
                 $this->respuesta['msg'] = 'Por favor ingrese el tipo de servicio';
-
-            }
-            if ( empty( $this->datos['Fecha']) ) {
-                
-                $this->respuesta['msg'] = 'Por favor ingrese una fecha';
 
             }
 
@@ -69,17 +62,38 @@
                 
                 if ( $this->datos['accion'] === 'nuevo') {
 
-                    $this->db->consultas('INSERT INTO Servicios (Id_Clientes, Id_TipoServicio, Fecha) VALUES('.$this->datos['Cliente'].', '.$this->datos['Tipo_Servicio'].', "'.$this->datos['Fecha'].'")');
+                    $this->db->consultas('INSERT INTO Servicios (Id_TipoServicio, Id_Factura) VALUES('.$this->datos['Tipo_Servicio'].', '.$this->datos['Factura'].')');
 
+                    $idFactura = $this->datos['Factura'];
+
+                    $this->AgregarTotal($idFactura);
+                    
+                    
                     $this->respuesta['msg'] = 'Registro insertado correctamente';
                 }
 
             }
 
         }
+        public function AgregarTotal($idFactura){
+            $this->db->consultas('SELECT SUM(TipoServicio.Costo) As Total FROM Servicios, TipoServicio WHERE Servicios.Id_Factura = '.$idFactura.' AND Servicios.Id_TipoServicio = TipoServicio.Id_TipoServicio ');
+
+            $Suma = $this->db->obtener_data();
+            $Total = 0.00;
+            for ($i=0; $i < count($Suma); $i++) {
+
+                if ( $Suma[$i]['Total'] > 0) {
+                    $Total = $Suma[$i]['Total'];
+                }
+                
+            }
+
+            $this->db->consultas('UPDATE Facturacion SET ValorPagado = '.$Total.' WHERE Facturacion.Id_Facturacion = '.$idFactura);
+
+        }
         
-        public function buscarAgregarServicios($valor=''){
-            $this->db->consultas('SELECT Servicios.Id_servicios, Clientes.Nombre, TipoServicio.Servicio, Servicios.Fecha FROM Servicios,Clientes,TipoServicio WHERE Clientes.Id_Clientes = Servicios.Id_Clientes AND Servicios.Id_TipoServicio = TipoServicio.Id_TipoServicio AND Clientes.Nombre LIKE "%'.$valor.'%"');
+        public function buscarAgregarServicios($valor='', $IdFactura){
+            $this->db->consultas('SELECT Servicios.Id_servicios, TipoServicio.Servicio, TipoServicio.Costo FROM Servicios,TipoServicio, Facturacion WHERE Servicios.Id_TipoServicio = TipoServicio.Id_TipoServicio AND Servicios.Id_Factura = Facturacion.Id_Facturacion AND Facturacion.Id_Facturacion = '.$IdFactura.' AND TipoServicio.Servicio LIKE "%'.$valor.'%"');
             return $this->respuesta = $this->db->obtener_data();
         }
 
@@ -104,13 +118,28 @@
                 $ImprimirServicio[] = $Servicio[$i]['Servicio'];
                 $ImprimirServicioIDs[] = $Servicio[$i]['Id_TipoServicio'];
             }
+
             // echo json_encode($ImprimirVehiculos);
             return $this->respuesta = ['Clientes'=>$imprimirClientes, 'ClientesID'=>$imprimirClientesIDs , 'Servicio'=>$ImprimirServicio, 'ServicioID'=>$ImprimirServicioIDs];//array de php en v7+
         }
 
         public function eliminarAgregarServicios($idAgregarServicios=''){
+
+            $this->db->consultas('SELECT Servicios.Id_Factura FROM Servicios WHERE Id_Servicios = '. $idAgregarServicios);
+
+            $Factura = $this->db->obtener_data();
+
+            $IdFactura;
+            for ($i=0; $i < count($Factura); $i++) { 
+                $IdFactura = $Factura[$i]['Id_Factura'];
+            }
+
             $this->db->consultas('DELETE FROM Servicios WHERE Id_servicios = '. $idAgregarServicios);
-            $this->respuesta['msg'] = 'Registro eliminado correctamente';
+
+            $this->AgregarTotal($IdFactura);
+
+            $this->respuesta['msg'] = "Registro Eliminado Correctamente";
+
         }
 
         public function modificarAgregarServicios(){
@@ -119,9 +148,12 @@
                 
                 if ( $this->datos['accion'] === 'modificar') {
 
-                    $this->db->consultas('UPDATE Servicios SET Id_Clientes = "'.$this->datos['Cliente'].'", Id_TipoServicio = "'.$this->datos['Tipo_Servicio'].'", Fecha = "'.$this->datos['Fecha'].'" WHERE Id_servicios = '.$this->datos['idAgregarServicios']);
+                    $this->db->consultas('UPDATE Servicios SET  Id_TipoServicio = "'.$this->datos['Tipo_Servicio'].'" WHERE Id_servicios = '.$this->datos['idAgregarServicios']);
+
+                    $this->AgregarTotal($idFactura);
 
                     $this->respuesta['msg'] = 'Registro modificado correctamente';
+
                 }
                 
             }

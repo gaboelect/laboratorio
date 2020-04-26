@@ -1,0 +1,38 @@
+.modulos{
+    display: flex;
+    position: absolute;
+    margin: 20px;
+}
+.v-select{
+    background: #fff;
+    border-radius: 5pxl;
+    color: black;
+}
+.salir{
+    margin-top: 5px;
+    float: right;
+    background: blue;
+}
+body
+{
+   background: #e0d5d5;
+}
+
+li a{
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    display: block;  
+}
+li a:hover
+{
+background: #e6ecec;
+
+}
+
+ .datosUsu 
+{
+    font-size: 0.9em;
+    color: #fff;
+}
+

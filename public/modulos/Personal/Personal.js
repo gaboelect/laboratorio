@@ -13,6 +13,8 @@ var appPersonal = new Vue({
             Direccion : '',
             Telefono  : '',
             Cargo     : '',
+            Usuario   : '',
+            Password  : '',
             msg       : ''
 
         }
@@ -31,6 +33,8 @@ var appPersonal = new Vue({
                 this.personal.Nombre = '';
                 this.personal.Direccion = '';
                 this.personal.Telefono = '';
+                this.personal.Usuario = '';
+                this.personal.Password = '';
                 this.personal.accion = 'nuevo';
                 
             });
@@ -64,6 +68,7 @@ var appBuscarPersonal = new Vue({
         modificarPersonal:function(personal){
             appPersonal.personal = personal;
             appPersonal.personal.accion = 'modificar';
+            console.log(JSON.stringify(appPersonal.personal));
             
         },
         verificacionEliminacion:function(idPersonal){

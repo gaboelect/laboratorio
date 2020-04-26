@@ -1,0 +1,87 @@
+<form v-on:submit.prevent="guardarFacturacion" method="get" id="frmFacturacion" data-accion="nuevo">
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 48rem;">
+        <div class="card-header text-center">
+            Facturacion
+            <button type="button" id="close-Facturacion" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="card-body">
+            <table id="tbl-buscar-Facturacion" class="table-striped table-primarytable-hover">
+                <thead>
+                    <tr>
+                        <th colspan="5">
+                            <div class="row p-2">
+                                <div class="col-4">
+                                    Empleado:
+                                </div>
+                                <div class="col-6">
+                                    <v-select v-model="Factura.Trabajador" :options="Trabajador"></v-select>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-4">
+                                    CLIENTES
+                                </div>
+                                <div class="col-8">
+                                    <v-select v-model="Factura.Cliente" :options="Cliente"></v-select>
+                                </div>
+                            </div>
+                            <input type="button" class="btn btn-outline-success text-white" value="Agregar Nueva Factura" v-on:click="AgregarFactura" style="width: 100%;">
+                            <hr>
+                            Buscar
+                            <input type="text" v-model="valor" v-on:keyup="buscarFacturacion" placeholder="Busqueda por personal" class="form-control">
+                            
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Personal</th>
+                        <th>Cliente</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="Facturacion in Facturaciones" :key="Facturacion.Id_Facturacion ">
+                        <td>{{ Facturacion.Personal }}</td>
+                        <td>{{ Facturacion.Cliente }}</td>
+                        <td>{{ Facturacion.Fecha_Hora_E }}</td>
+                        <td>{{ Facturacion.Fecha_Hora_S }}</td>
+                        <td>{{ Facturacion.ValorPagado}}</td>
+                        <td>
+                            <input v-on:click="verificacionEliminacion(Facturacion.Id_Facturacion )" type="button" class="btn btn-outline-danger text-white" value="Delete">
+                            <input v-on:click="AddService(Facturacion.Id_Facturacion)" type="button" class="btn btn-outline-warning text-white" value="Servicios" data-toggle="modal" data-target="#Facturacion">
+                            <input v-on:click="SalidaFactura(Facturacion.Id_Facturacion )" type="button" class="btn btn-outline-warning text-white" value="Salida">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+<div class="modal fade" id="Facturacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Busqueda de Facturacion</h5>
+          <button type="button" id="CerrarModal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <label style="opacity: 0;" id="IDFactura"></label>
+            <div class="" id="cargarModal" style="margin-top: -29px;"></div>
+        
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="./public/modulos/Facturacion/Facturacion.js"></script>

@@ -1,6 +1,7 @@
 
 Vue.component('v-select', VueSelect.VueSelect);
 
+
 var appAgregarServicios = new Vue({
 
     el:'#frmAgregarServicios',
@@ -11,16 +12,14 @@ var appAgregarServicios = new Vue({
 
             idAgregarServicios  : '',
             accion      : $("#frmAgregarServicios").data("accion"),
-            Cliente     : '',
             Tipo_Servicio    : '',
-            Fecha   :   '',
+            Factura :   '',
             msg         : ''
 
         },
+        
         Servicio : [],
-        ServicioId : [],
-        Cliente : [],
-        ClienteId : []
+        ServicioId : []
 
     },
     methods:{
@@ -33,23 +32,16 @@ var appAgregarServicios = new Vue({
                 }
             }
 
-            for (let index = 0; index < this.Cliente.length; index++) {
-                if (this.Cliente[index] == this.AgregarServicios.Cliente) {
-                    this.AgregarServicios.Cliente = this.ClienteId[index];
-                }
-            }
-
+            this.AgregarServicios.Factura = $("#IDFactura").html();
             console.log(JSON.stringify(this.AgregarServicios));
             
             
             fetch(`private/Modulos/AgregarServicios/procesos.php?proceso=recibirDatos&AgregarServicio=${JSON.stringify(this.AgregarServicios)}`).then( resp=>resp.json() ).then(resp=>{
                 this.AgregarServicios.msg = resp.msg;
                 this.AgregarServicios.idAgregarServicios = 0;
-                this.AgregarServicios.Cliente = '';
                 this.AgregarServicios.Tipo_Servicio = '';
-                this.AgregarServicios.Fecha  = '';
                 this.AgregarServicios.accion = 'nuevo';
-                
+                this.buscarAgregarServicios();
             });
 
         },
@@ -62,9 +54,7 @@ var appAgregarServicios = new Vue({
     },
     created: function(){
         fetch(`private/Modulos/AgregarServicios/procesos.php?proceso=traer_periodos_alumnos&AgregarServicio=`).then(resp=>resp.json()).then(resp=>{
-            appAgregarServicios.Cliente = resp.Clientes;
-            appAgregarServicios.ClienteId = resp.ClientesID;
-
+            
             appAgregarServicios.Servicio = resp.Servicio;
             appAgregarServicios.ServicioId   = resp.ServicioID;
 
@@ -78,6 +68,7 @@ var appAgregarServicios = new Vue({
     
 });
 
+
 var appBuscarAgregarServicios = new Vue({
 
     el:'#frm-buscar-AgregarServicios',
@@ -89,15 +80,14 @@ var appBuscarAgregarServicios = new Vue({
     methods:{
 
         buscarAgregarServicios:function(){
-            fetch(`private/Modulos/AgregarServicios/procesos.php?proceso=buscarAgregarServicios&AgregarServicio=${this.valor}`).then(resp=>resp.json()).then(resp=>{
+            let IdFactura = $("#IDFactura").html();
+            fetch(`private/Modulos/AgregarServicios/procesos.php?proceso=buscarAgregarServicios&AgregarServicio=${this.valor}&Factura=${IdFactura}`).then(resp=>resp.json()).then(resp=>{
                 this.AgregarServicioses = resp;
             });
         },
         modificarAgregarServicios:function(AgregarServicios){
             appAgregarServicios.AgregarServicios.idAgregarServicios = AgregarServicios.Id_servicios;
-            appAgregarServicios.AgregarServicios.Cliente = AgregarServicios.Nombre;
             appAgregarServicios.AgregarServicios.Tipo_Servicio = AgregarServicios.Servicio;
-            appAgregarServicios.AgregarServicios.Fecha = AgregarServicios.Fecha;
             appAgregarServicios.AgregarServicios.accion = 'modificar';
             
         },
@@ -116,7 +106,8 @@ var appBuscarAgregarServicios = new Vue({
             console.log(id);
             
             fetch(`private/Modulos/AgregarServicios/procesos.php?proceso=eliminarAgregarServicios&AgregarServicio=${id}`).then(resp=>resp.json()).then(resp=>{
-                this.buscarAgregarServicios();
+                
+                appBuscarAgregarServicios.buscarAgregarServicios();
             });
         }
     },

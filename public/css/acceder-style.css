@@ -1,0 +1,26 @@
+body
+{
+    background: hsl(178, 0%, 84%);
+
+}
+
+form
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 40px;
+    background: #1E90FF;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+
+}
+p
+{
+    text-align: center;
+    padding-bottom: 5px;
+    top: 0;
+}
