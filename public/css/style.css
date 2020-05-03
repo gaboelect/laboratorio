@@ -1,0 +1,10 @@
+.modulos{
+    display: flex;
+    position: absolute;
+    margin: 20px;
+}
+.v-select{
+    background: #fff;
+    border-radius: 5pxl;
+    color: black;
+}

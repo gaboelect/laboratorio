@@ -1,0 +1,124 @@
+<form v-on:submit.prevent="guardarPersonal" method="get" id="frmPersonal" data-accion="nuevo">
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 48rem;">
+        <div class="card-header text-center">
+            PELICULAS
+            <button type="button" id="close-Personal" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row p-2">
+                <div class="col-4">
+                    DESCRIPCION 
+                </div>
+                <div class="col-6">
+                    <input type="text" v-model="personal.Descripcion" placeholder="DESCRIPCION" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    SINOPSIS
+                </div>
+                <div class="col-8">
+                    <input type="text" v-model="personal.Sinopsis" placeholder="SINOPSIS" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    GENERO
+                </div>
+                <div class="col-8">
+                    <input type="text" v-model="personal.Genero" placeholder="GENERO" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-4">
+                    DURACION 
+                </div>
+                <div class="col-8">
+                    <input type="text" v-model="personal.Duracion" placeholder="hh:mm:ss" class="form-control">
+                </div>
+            </div>
+            <div class="row p-2"> 
+                <div class="col-12 text-center">
+                    <input id="btnGuardarAlumnos" type="submit" class="btn btn-outline-success text-white" value="Guardar">
+                    <input type="reset" class="btn btn-outline-warning text-white" value="Limpiar">
+                    <button v-on:click="buscarPersonal()" type="button" class="btn btn-outline-dark mostrar-buscar-alumnos text-white" data-toggle="modal" data-target="#exampleModalCenter">
+                        Buscar
+                      </button>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-12 text-center">
+                    <div class="alert alert-success" role="alert">
+                        {{ personal.msg }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Busqueda de Peliculas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!--  -->
+          <form method="POST" id="frm-buscar-personal">
+            <div class="card text-white bg-primary mb-3" style="max-width: 48rem;">
+                <div class="car-header">
+                    BUSQUEDA DE PELICULAS
+                </div>
+                <div class="card-body">
+                    <table id="tbl-buscar-personal" class="table-striped table-primarytable-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="5">
+                                    <input type="text" v-model="valor" v-on:keyup="buscarPersonal" placeholder="codigo o nombre" class="form-control">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>DESCRIPCION</th>
+                                <th>SINOPSIS</th>
+                                <th>GENERO</th>
+                                <th>DURACION</th>
+                                
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="personal in personales" :key="personal.Id_Personal">
+                                <td>{{ personal.Descripcion }}</td>
+                                <td>{{ personal.Sinopsis }}</td>
+                                <td>{{ personal.Genero }}</td>
+                                <td>{{ personal.Duracion }}</td>
+                            
+                                <td>
+                                    <input v-on:click="verificacionEliminacion(personal.Id_Pelicula)" type="button" class="btn btn-outline-danger text-white" value="Delete">
+                                    <input v-on:click="modificarPersonal(personal)" data-dismiss="modal" type="button" class="btn btn-outline-warning text-white" value="Update">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+        
+    
+          <!--  -->
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="./public/modulos/Personal/Personal.js"></script>
