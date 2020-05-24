@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAR-WASH</title>
+
+    <!-- Vue Select -->
+    <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+    <!-- Alert -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS Local -->
+    <link rel="stylesheet" href="./public/css/style.css">
+    <!-- Iconos -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <!-- Navegacion -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+     
+      
+        <a class="navbar-brand logo " href="#">CarWash</a>
+        
+        
+          <a class="navbar-brand datosUsu" id="nombrecargoUsu" href="#"></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse justify-content-end"  id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item" style="margin-right: 10px;">
+              <a class="nav-link mostrar" data-module="Personal" id="personal" href="#">Personal  <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mostrar" data-module="Clientes" style="margin-right: 10px;" id="clientes" href="#">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mostrar" data-module="Vehiculos" style="margin-right: 10px;" href="#">Vehiculos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mostrar" data-module="Servicios" style="margin-right: 10px;" id="mantenimiento" href="#">Mantenimiento Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mostrar" data-module="Facturacion" style="margin-right: 10px;" href="#">Facturacion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mostrar" data-module="Estadisticas" style="margin-right: 10px;" id="estadisticas" href="#">Estadisticas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mostrar" data-module="Chat" style="margin-right: 10px;" id="estadisticas" href="#">Chat</a>
+            </li>
+
+            <button class=" btn btn-outline-dark d-inline-block text-light mr-2 mb-3 width-100  salir" onclick="cerrarSesion()" ><i class="fa fa-sign-out" aria-hidden="true"></i>  </button>
+
+          </ul>
+        </div>
+    </nav>
+
+    <div class="modulos">
+        <div id="vista-Personal"></div>
+        <div id="vista-Clientes"></div>
+        <div id="vista-Vehiculos"></div>
+        <div id="vista-Servicios"></div>
+        <div id="vista-Facturacion"></div>
+        <div id="vista-Estadisticas"></div>
+        <div id="vista-Chat"></div>
+
+        <div id="vista-Aceite"></div>
+    </div>
+
+    
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- JQuery UI -->
+    <script src="./public/js/jquery-ui.js"></script>
+
+    <!-- Vue JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- JS -->
+    <script src="./public/js/app.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- Vue Select -->
+
+    <script src="https://unpkg.com/vue-select@latest"></script>
+
+    <!-- Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- CDN Client NodeJS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+</body>
+</html>
