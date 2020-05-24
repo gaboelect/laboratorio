@@ -25,7 +25,7 @@
             $this->db = $db; 
 
         }
-
+        
         public function recibirDatos($personal){
 
             $this->datos = json_decode($personal, true);
