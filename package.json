@@ -10,11 +10,20 @@
   "author": "CarWash",
   "license": "MIT",
   "dependencies": {
+    "-": "0.0.1",
     "express": "^4.17.1",
     "mongodb": "^3.5.7",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaboelect/laboratorio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gaboelect/laboratorio/issues"
+  },
+  "homepage": "https://github.com/gaboelect/laboratorio#readme"
 }
